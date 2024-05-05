@@ -1,0 +1,8 @@
+{
+    "ExchangeData": "/home/mukund/data/stocks/data/stockdataSrc",
+    "DerivedDataPath": "/home/mukund/data/stocks/data/stockdata",
+    "bufData": "/home/mukund/data/stocks/data/bufData",
+    "Tickers": [
+        "RENUKA.NS"
+    ]
+}
