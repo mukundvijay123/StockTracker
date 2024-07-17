@@ -1,7 +1,7 @@
 '''
 Structure for redis json strings
 {objType:ADD/DEL/UPDATE,
-ticker:
+ticker: ticker_name
 }
 '''
 
@@ -21,6 +21,7 @@ addq=TaskQueue()
 delq=TaskQueue()
 updtq=TaskQueue()
 
+#setting initial timestamps
 addq.lastTaskPerform=datetime(2000,1,1,1,1,1)
 delq.lastTaskPerform=datetime(2000,1,1,1,1,1)
 updtq.lastTaskPerform=datetime(2000,1,1,1,1,1)
@@ -43,7 +44,7 @@ def distributor(addq:TaskQueue,delq:TaskQueue,updtq:TaskQueue):
 
 
 #Engine function
-
+#canUpdateorAdd() used to avoid being rate limited by yahoo finance.Between any two add or update taskks a buffer time is maintained .The buffer time value is stored in engineUtils which is present within the utils folder.
 def engine(addq:TaskQueue,delq:TaskQueue,updtq:TaskQueue):
     
     while True:
