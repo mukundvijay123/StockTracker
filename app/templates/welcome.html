@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='welcome.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome</h1>
+        <p>Your Tickers:</p>
+        <label for="tickerInput">Enter ticker:</label>
+        <input type="text" id="tickerInput" name="tickerInput">
+        <button id="addButton">Add</button>
+        <button id="updateButton">Update</button>
+        <button id="deleteButton">Delete</button>
+    </div>
+
+    <script>
+        document.getElementById('addButton').addEventListener('click', function() {
+            sendData('ADD');
+            document.getElementById('tickerInput').value = ''; // Clear input field
+        });
+    
+        document.getElementById('updateButton').addEventListener('click', function() {
+            sendData('UPDATE');
+            document.getElementById('tickerInput').value = ''; // Clear input field
+        });
+    
+        document.getElementById('deleteButton').addEventListener('click', function() {
+            sendData('DEL');
+            document.getElementById('tickerInput').value = ''; // Clear input field
+        });
+    
+        function sendData(buttonId) {
+            const tickerText = document.getElementById('tickerInput').value;
+            const data = { buttonId: buttonId, tickerText: tickerText };
+    
+            fetch('/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log('Success:', result);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+    
+</body>
+</html>
