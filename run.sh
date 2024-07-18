@@ -11,7 +11,7 @@ ENGINE_PID=$!
 
 cleanup(){
 	echo "Stopping all processes"
-	Kill ENGINE_PID REDIS_PID
+	kill ENGINE_PID REDIS_PID
 }
 
 trap cleanup EXIT
